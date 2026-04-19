@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nazrawi Gedion | AI Data Specialist Portfolio</title>
+    <style>
+        :root {
+            --primary: #00ff41;
+            --secondary: #003b00;
+            --accent: #00ff41;
+            --text: #00ff41;
+            --bg: #0a0a0a;
+            --card-bg: #0d1117;
+            --dim: #008F11;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: linear-gradient(180deg, #000000 0%, #0a1a0a 50%, #000000 100%);
+        }
+        .matrix-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 65, 0.03) 2px, rgba(0, 255, 65, 0.03) 4px);
+            animation: matrix-scan 8s linear infinite;
+        }
+        @keyframes matrix-scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100px); }
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            background: linear-gradient(180deg, #0d1117 0%, #000000 100%);
+            padding: 3.5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--dim);
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(0, 255, 65, 0.05) 0%, transparent 70%);
+            animation: glitch 3s ease-in-out infinite;
+        }
+        @keyframes glitch {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.5; }
+        }
+        .profile-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3), inset 0 0 20px rgba(0, 255, 65, 0.1);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+            filter: grayscale(30%);
+        }
+        .profile-img:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.5), inset 0 0 30px rgba(0, 255, 65, 0.2);
+            filter: grayscale(0%);
+        }
+        header h1 { 
+            margin: 1.5rem 0 0.5rem; 
+            font-size: 2.2rem; 
+            color: var(--primary); 
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+            text-shadow: 0 0 10px var(--primary);
+            letter-spacing: 2px;
+        }
+        .subtitle { 
+            font-size: 1.1rem; 
+            color: var(--dim); 
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 1px;
+        }
+        .contact-info { 
+            margin-top: 1.2rem; 
+            font-size: 0.9rem; 
+            color: var(--dim);
+            position: relative;
+            z-index: 1;
+        }
+        .contact-info a { color: var(--primary); text-decoration: none; }
+        .contact-info a:hover { color: white; text-shadow: 0 0 10px var(--primary); }
+        
+        section {
+            background: var(--card-bg);
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+            border: 1px solid var(--secondary);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.05);
+            transition: all 0.3s ease;
+        }
+        section:hover {
+            border-color: var(--dim);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+        }
+        h2 { 
+            border-left: 3px solid var(--primary); 
+            padding-left: 1rem; 
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .skill-tag { 
+            background: var(--secondary); 
+            padding: 0.5rem 1rem; 
+            border-radius: 2px; 
+            display: inline-block; 
+            margin: 0.25rem; 
+            font-size: 0.85rem;
+            color: var(--primary);
+            border: 1px solid var(--dim);
+            transition: all 0.3s ease;
+        }
+        .skill-tag:hover {
+            background: var(--primary);
+            color: black;
+            box-shadow: 0 0 15px var(--primary);
+        }
+        
+        .job { margin-bottom: 2rem; }
+        .job-header { display: flex; justify-content: space-between; font-weight: 600; color: var(--dim); }
+        .job-title { font-style: italic; color: var(--primary); font-weight: 500; }
+        
+        .project-card { 
+            border: 1px solid var(--secondary); 
+            padding: 1.2rem; 
+            border-radius: 2px; 
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        .project-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.15);
+        }
+        
+        footer { 
+            text-align: center; 
+            padding: 2rem; 
+            font-size: 0.85rem; 
+            color: var(--dim);
+            border-top: 1px solid var(--secondary);
+        }
+        
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            header h1 { font-size: 1.8rem; }
+            .profile-img { width: 110px; height: 110px; }
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+        ul li::before {
+            content: '>';
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="matrix-bg"></div>
+
+<header>
+    <div class="container">
+        <img src="https://avatars.githubusercontent.com/u/119290537?v=4" alt="Nazrawi Gedion" class="profile-img">
+        <h1>Nazrawi Gedion</h1>
+        <p class="subtitle">AI Data Specialist | Amharic Language Expert | Data Annotation</p>
+        <div class="contact-info">
+            Addis Ababa, Ethiopia | +251 954 988 574 | 
+            <a href="https://github.com/nazrawigedion123/">GitHub</a>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <section id="summary">
+        <h2>Professional Summary</h2>
+        <p>Detail-oriented professional with 4+ years of experience in technology and data-driven systems. I combine native-level fluency in Amharic with strong English proficiency to analyze, structure, and validate complex datasets. My expertise lies in backend development, data annotation, and quality assurance for AI systems, specifically focusing on low-resource languages.</p>
+    </section>
+
+    <section id="skills">
+        <h2>Skills & Expertise</h2>
+        <div class="grid">
+            <div>
+                <h3>Technical</h3>
+                <span class="skill-tag">Data Annotation & Labeling</span>
+                <span class="skill-tag">Data Quality Evaluation</span>
+                <span class="skill-tag">Structured Data (SQL, APIs)</span>
+                <span class="skill-tag">Pairwise Comparison</span>
+                <span class="skill-tag">Machine Learning Concepts</span>
+            </div>
+            <div>
+                <h3>Linguistic</h3>
+                <span class="skill-tag">Amharic (Native)</span>
+                <span class="skill-tag">English (Fluent - B2/C1)</span>
+                <span class="skill-tag">Linguistic Detail & Validation</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2>Relevant Experience</h2>
+        
+        <div class="job">
+            <div class="job-header">
+                <span>OneTap Technology</span>
+                <span>Jun 2025 - Present</span>
+            </div>
+            <div class="job-title">Golang Developer</div>
+            <ul>
+                <li>Validated and processed large datasets to ensure consistency across systems.</li>
+                <li>Designed systems requiring precise data handling and transformation.</li>
+                <li>Handled critical financial and service-related data with high attention to detail.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <span>BDN</span>
+                <span>Sep 2024 - Present</span>
+            </div>
+            <div class="job-title">Backend Developer</div>
+            <ul>
+                <li>Built APIs focused on data processing, validation, and transformation.</li>
+                <li>Managed high-quality data flow and improved handling efficiency for structured datasets.</li>
+                <li>Participated in quality assurance for data-driven features.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <span>Business Computing Services / CEIC</span>
+                <span>May 2022 - Nov 2024</span>
+            </div>
+            <div class="job-title">Associate Tech Consultant / IT Officer</div>
+            <ul>
+                <li>Maintained data integrity across internal systems and conducted audits.</li>
+                <li>Translated client requirements into structured technical solutions.</li>
+                <li>Ensured accuracy in system implementations through data-driven insights.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Key Projects</h2>
+        <div class="project-card">
+            <h3>E-Learning Platform</h3>
+            <p>Developing backend systems to handle user-generated content and structured data, with a primary focus on data validation and consistency.</p>
+        </div>
+        <div class="project-card">
+            <h3>Blog & CMS Platforms</h3>
+            <p>Managed content-heavy systems requiring organization of text-based data and structured content formatting.</p>
+        </div>
+    </section>
+
+    <section id="education">
+        <h2>Education</h2>
+        <p><strong>University of Gondar</strong><br>
+        Bachelor's Degree, 2018 - 2021</p>
+    </section>
+</div>
+
+<footer>
+    &copy; 2026 Nazrawi Gedion. Professional Portfolio.
+</footer>
+
+</body>
+</html>
